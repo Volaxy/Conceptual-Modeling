@@ -1,29 +1,27 @@
 package com.gustavomp.coursecm.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gustavomp.coursecm.domain.Categoria;
+import com.gustavomp.coursecm.services.CategoriaService;
 
 @RestController
 @RequestMapping(path = "/categorias")
 public class CategoriaResource {
+	
+	@Autowired
+	CategoriaService service;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Categoria> listar() {
-		Categoria c1 = new Categoria(1, "Informática");
-		Categoria c2 = new Categoria(2, "Escritório");
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Categoria obj = service.buscar(id);
 		
-		List<Categoria> categorias = new ArrayList<Categoria>();
-		
-		categorias.add(c1);
-		categorias.add(c2);
-		
-		return categorias;
+		return ResponseEntity.ok().body(obj);
 	}
 	
 }
