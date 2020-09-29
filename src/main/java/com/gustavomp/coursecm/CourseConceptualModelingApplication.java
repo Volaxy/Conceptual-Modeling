@@ -13,6 +13,7 @@ import com.gustavomp.coursecm.domain.Cidade;
 import com.gustavomp.coursecm.domain.Cliente;
 import com.gustavomp.coursecm.domain.Endereco;
 import com.gustavomp.coursecm.domain.Estado;
+import com.gustavomp.coursecm.domain.ItemPedido;
 import com.gustavomp.coursecm.domain.Pagamento;
 import com.gustavomp.coursecm.domain.PagamentoComBoleto;
 import com.gustavomp.coursecm.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.gustavomp.coursecm.repositories.CidadeRepository;
 import com.gustavomp.coursecm.repositories.ClienteRepository;
 import com.gustavomp.coursecm.repositories.EnderecoRepository;
 import com.gustavomp.coursecm.repositories.EstadoRepository;
+import com.gustavomp.coursecm.repositories.ItemPedidoRepository;
 import com.gustavomp.coursecm.repositories.PagamentoRepository;
 import com.gustavomp.coursecm.repositories.PedidoRepository;
 import com.gustavomp.coursecm.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 	PedidoRepository pedidoRepository;
 	@Autowired
 	PagamentoRepository pagamentoRepository;
+	@Autowired
+	ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CourseConceptualModelingApplication.class, args);
@@ -75,7 +79,7 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		
-		//Estado and Cidade isntantiation
+		//Estado and Cidade ...
 		
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
@@ -90,7 +94,7 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		//Cliente and Endereco instantiation
+		//Cliente and Endereco ...
 		
 		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "53425347", TipoCliente.PESSOA_FISICA);
 		cli1.getTelefones().addAll(Arrays.asList("2734658854", "94736522"));
@@ -103,7 +107,7 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 		clienteRepository.save(cli1);
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
-		//Pedido and Pagamento instantiation
+		//Pedido and Pagamento ...
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		
@@ -120,6 +124,21 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		//ItemPedido ... 
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p2, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p3, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().add(ip3);
+		
+		p1.getItens().add(ip1);
+		p2.getItens().add(ip3);
+		p3.getItens().add(ip2);
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 	}
 
