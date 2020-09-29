@@ -39,6 +39,9 @@ public class Cliente implements Serializable {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<Pedido>();
 
 	//Constructors
 	public Cliente() {
@@ -100,6 +103,10 @@ public class Cliente implements Serializable {
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
 
 	@Override
