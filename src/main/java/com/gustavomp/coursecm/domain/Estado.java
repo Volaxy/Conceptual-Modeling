@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Estado implements Serializable {
 	
+	//Atributes
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -23,6 +24,7 @@ public class Estado implements Serializable {
 	@OneToMany(mappedBy = "estado")
 	private List<Cidade> cidades = new ArrayList<Cidade>();
 	
+	//Constructors
 	public Estado() {
 		
 	}
@@ -32,6 +34,7 @@ public class Estado implements Serializable {
 		this.nome = nome;
 	}
 
+	//Getters and Setters
 	public Integer getId() {
 		return id;
 	}

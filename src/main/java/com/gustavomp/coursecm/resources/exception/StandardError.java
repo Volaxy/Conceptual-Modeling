@@ -2,6 +2,7 @@ package com.gustavomp.coursecm.resources.exception;
 
 import java.io.Serializable;
 
+//Message of default error
 public class StandardError implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

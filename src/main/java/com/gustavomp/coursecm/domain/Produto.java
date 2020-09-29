@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Produto implements Serializable {
 
+	//Atributes
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,6 +33,7 @@ public class Produto implements Serializable {
 	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<Categoria>();
 	
+	//Constructors
 	public Produto() {
 		
 	}
@@ -42,6 +44,7 @@ public class Produto implements Serializable {
 		this.price = price;
 	}
 
+	//Getters and Setters
 	public Integer getId() {
 		return id;
 	}

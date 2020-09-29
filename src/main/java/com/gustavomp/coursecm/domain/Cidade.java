@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Cidade implements Serializable {
 
+	//Atributes
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -23,6 +24,8 @@ public class Cidade implements Serializable {
 	@JoinColumn(name = "estado_id")
 	private Estado estado;
 	
+	
+	//Constructors
 	public Cidade() {
 		
 	}
@@ -33,6 +36,7 @@ public class Cidade implements Serializable {
 		this.estado = estado;
 	}
 
+	//Getters and Setters
 	public Integer getId() {
 		return id;
 	}

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Categoria implements Serializable {
 	
+	//Atributes
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -26,6 +27,7 @@ public class Categoria implements Serializable {
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
+	//Constructors
 	public Categoria() {
 		
 	}
@@ -35,6 +37,7 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
+	//Getters and Setters
 	public Integer getId() {
 		return id;
 	}

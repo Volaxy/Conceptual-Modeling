@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.gustavomp.coursecm.domain.Categoria;
 import com.gustavomp.coursecm.domain.Cidade;
+import com.gustavomp.coursecm.domain.Cliente;
+import com.gustavomp.coursecm.domain.Endereco;
 import com.gustavomp.coursecm.domain.Estado;
 import com.gustavomp.coursecm.domain.Produto;
+import com.gustavomp.coursecm.domain.enums.TipoCliente;
 import com.gustavomp.coursecm.repositories.CategoriaRepository;
 import com.gustavomp.coursecm.repositories.CidadeRepository;
+import com.gustavomp.coursecm.repositories.ClienteRepository;
+import com.gustavomp.coursecm.repositories.EnderecoRepository;
 import com.gustavomp.coursecm.repositories.EstadoRepository;
 import com.gustavomp.coursecm.repositories.ProdutoRepository;
 
@@ -27,6 +32,10 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 	EstadoRepository estadoRepository;
 	@Autowired
 	CidadeRepository cidadeRepository;
+	@Autowired
+	ClienteRepository clienteRepository;
+	@Autowired
+	EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CourseConceptualModelingApplication.class, args);
@@ -34,6 +43,9 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		//Categoria and Produto instantiation
+		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
 		
@@ -51,7 +63,7 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		
-		//
+		//Estado and Cidade isntantiation
 		
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
@@ -65,6 +77,20 @@ public class CourseConceptualModelingApplication implements CommandLineRunner {
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		//Cliente and Endereco instantiation
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "53425347", TipoCliente.PESSOA_FISICA);
+		cli1.getTelefones().addAll(Arrays.asList("2734658854", "94736522"));
+		
+		Endereco e1 = new Endereco(null, "Rua flores", "300", "Apto 303", "Jardim", "38574677", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "47895847", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.save(cli1);
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
 	}
 
 }
